@@ -5,7 +5,10 @@ class MyList extends Component {
     
     constructor() {
         super();
-        let items = [];
+        
+        this.items = [
+        ];
+
     }
 
     render() {
@@ -13,21 +16,24 @@ class MyList extends Component {
             <div>
                 <ul>
                     {this.items.map(function(item, i) {
-                        return "<ListItem item=\""+item+"\" />";
+                        return (
+                            <ListItem item={item} />
+                        );
                     })}
                 </ul>
                 <button 
-                        onClick={this.addListItem}>Add list item</button>
+                        onClick={(e) => { this.addListItem(e) }}>Add list item</button>
             </div>
         );
     }
 
 
     addListItem() {
-        let itemCount = this.items.length + 1;
 
-        console.log(itemCount);
-        this.render();
+        let itemCount = this.items.length + 1;
+        this.items.push("Item #" + itemCount.toString());
+
+        this.forceUpdate();
     }
 
 }
